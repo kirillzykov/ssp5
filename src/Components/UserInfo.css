@@ -1,0 +1,38 @@
+.UserInfo {
+
+}
+
+.img {
+    width: 230px;
+    border-radius: 5%;
+    padding-bottom: 15px;
+}
+
+#name {
+    color: #24292e;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 30px;
+    -webkit-margin-after:0px;
+    -webkit-margin-before:0px;
+}
+
+#login {
+    color: #666;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    -webkit-margin-after:0px;
+    -webkit-margin-before:0px;
+    padding-bottom: 20px;
+}
+
+#bio {
+    color: #6a737d;
+    font-size: 15px;
+    border-bottom: solid #d4d6d0 1px;
+    padding-bottom: 20px;
+    -webkit-margin-after:0px;
+    -webkit-margin-before:0px;
+}

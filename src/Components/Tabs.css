@@ -1,0 +1,18 @@
+.TabList{
+
+}
+
+.tabs{
+    display: inline-flex; /* Отображать как строчный элемент */
+}
+
+.tab{
+    padding: 10px 20px 10px 20px;
+    border-bottom: 1px solid #d5d6d6;
+    cursor: pointer;
+}
+
+.tab.active{
+    border-bottom: 2px solid #e36209
+}
+
