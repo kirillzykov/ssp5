@@ -1,57 +1,43 @@
-import React, { Component } from 'react';
-import './App.css';
-import UserInfo from './Components/UserInfo.js';
-import {Tabs,Tab,TabList,TabPanel,TabPanels} from './Components/Tabs.js';
+import React, { Component } from "react";
+import "./App.css";
+import UserInfo from "./Components/UserInfo.js";
+import {Tabs,Tab,TabList,TabPanel,TabPanels} from "./Components/Tabs.js";
 import IconText from "./Components/IconText";
+import {fetchData} from "./Actions/Action";
+import {connect} from "react-redux"
+import propTypes from "prop-types"
 
+@connect((store)=>{
+    return{
+        data: store.data
+    }
+})
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            avatar:'',
-            name:'',
-            login:'',
-            bio:'',
-            company:'',
-            location:'',
-            email:'',
-            blog:''
-        }
     }
 
     componentDidMount() {
-        return fetch('https://api.github.com/users/kirillzykov')
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    avatar:responseJson.avatar_url,
-                    name:responseJson.name,
-                    login:responseJson.login,
-                    bio:responseJson.bio,
-                    company:responseJson.company,
-                    location:responseJson.location,
-                    email:responseJson.email,
-                    blog:responseJson.blog
-                }, function() {
+        //console.log(fetchData);
+        //this.props.dispatch(fetchData())
 
-                });
-            })
     }
-
     render() {
+        const data = this.props.data;
         return (
+
             <div className="App">
                 <div className={"UserInfoContainer"}>
                     <UserInfo
-                        avatar={this.state.avatar}
-                        name={this.state.name}
-                        login={this.state.login}
-                        bio={this.state.bio}
+                        avatar={data.avatar_url}
+                        name={data.name}
+                        login={data.login}
+                        bio={data.bio}
                     />
-                    <IconText icon={"users"} text={this.state.company}/>
-                    <IconText icon={"map-marker"} text={this.state.location}/>
-                    <IconText icon={"envelope"} text={this.state.email} link={this.state.email}/>
-                    <IconText icon={"link"} text={this.state.blog} link={this.state.blog}/>
+                    <IconText icon={"users"} text={data.company}/>
+                    <IconText icon={"map-marker"} text={data.location}/>
+                    <IconText icon={"envelope"} text={data.email} link={data.email}/>
+                    <IconText icon={"link"} text={data.blog} link={data.blog}/>
                 </div>
                 <div className={"TabsContainer"}>
                     <Tabs>
@@ -70,6 +56,14 @@ class App extends Component {
             </div>
         );
     }
-}
 
+}/*
+const mapDispatchToProps = (dispatch) => ({
+    dispatch: dispatch,
+    data: () => dispatch(fetchData())
+})
+
+const mapStateToProps = (state) => ({
+    data: state.data
+})*/
 export default App;
