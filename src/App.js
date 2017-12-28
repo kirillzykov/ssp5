@@ -4,24 +4,18 @@ import UserInfo from "./Components/UserInfo.js";
 import {Tabs,Tab,TabList,TabPanel,TabPanels} from "./Components/Tabs.js";
 import IconText from "./Components/IconText";
 import {fetchData} from "./Actions/Action";
-import {connect} from "react-redux"
+import { connect } from 'react-redux'
 import propTypes from "prop-types"
 
-@connect((store)=>{
-    return{
-        data: store.data
-    }
-})
 class App extends Component {
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        //console.log(fetchData);
-        //this.props.dispatch(fetchData())
-
+    componentWillMount() {
+        this.props.fetchData;
     }
+
     render() {
         const data = this.props.data;
         return (
@@ -57,13 +51,14 @@ class App extends Component {
         );
     }
 
-}/*
-const mapDispatchToProps = (dispatch) => ({
-    dispatch: dispatch,
-    data: () => dispatch(fetchData())
-})
 
-const mapStateToProps = (state) => ({
-    data: state.data
-})*/
-export default App;
+}
+App.propTypes = {
+    data: propTypes.object.isRequired,
+};
+function mapStateToProps(state) {
+    return {
+        data: state.data,
+    };
+}
+export default connect(mapStateToProps,fetchData())(App)

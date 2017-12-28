@@ -1,24 +1,23 @@
-
 const initialState ={
     fetching: false,
     fetched: false,
-    data: [],
+    data: {},
     error: null,
 };
 
-export function reducer(state={initialState}, action){
+export function reducer(state=initialState, action){
     switch(action.type) {
         case "FETCH_DATA_START":{
             return {
                 ...state,
-                fetching: true
+                fetching: true,
             };
         }
         case "FETCH_DATA_ERROR":{
             return {
                 ...state,
                 fetching: false,
-                error: action.payload
+                error: action.result.error,
             };
         }
         case "FETCH_DATA_RECEIVED":{
@@ -26,7 +25,7 @@ export function reducer(state={initialState}, action){
                 ...state,
                 fetching: false,
                 fetched: true,
-                data: action.payload
+                data: action.result.data,
             };
         }
         default:{
